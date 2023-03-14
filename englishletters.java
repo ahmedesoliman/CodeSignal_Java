@@ -12,7 +12,37 @@
 
 // Note: text consists of words separated by single spaces.
 
-int solution(String text, int n) {
+public class englishLetters {
 
+    // solution
+    public int solution(String text, int n) {
+        int count = 0;
+        String[] words = text.split(" ");
+        for (String word : words) {
+            if (word.length() < n) {
+                continue;
+            }
+            for (int i = 0; i < word.length() - n + 1; i++) {
+                String sub = word.substring(i, i + n);
+                if (sub.chars().distinct().count() == 1) {
+                    if (i == 0 || word.charAt(i - 1) != sub.charAt(0)) {
+                        if (i + n == word.length() || word.charAt(i + n) != sub.charAt(0)) {
+                            count++;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return count;
+    }
+
+    // test code for solution
+    public static void main(String[] args) {
+        englishLetters test = new englishLetters();
+        String text = "aaab abbb cdddee"; // expected output: 3
+        int n = 3;
+        System.out.println(test.solution(text, n));
+    }
 
 }

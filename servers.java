@@ -37,6 +37,40 @@
 // events[6] = "REQUEST" – the next request goes to server 0 again following the cyclic order, and requests count for each server is now [2, 2, 0, 0, 1],
 // Thus, the number of requests served by each server is [2, 2, 0, 0, 1]. Since both servers 0 and 1 have served the most requests at 2 each, the final answer is the largest index of 1.
 
-int solution(int[] serversPowers, String[] events) {
+public class servers {
+    int solution(int[] serversPowers, String[] events) {
 
+        // solution
+        int[] requests = new int[serversPowers.length];
+        int[] failed = new int[serversPowers.length];
+        int max = 0;
+        int maxIndex = 0;
+        int index = 0;
+
+        for (String event : events) {
+            if (event.equals("REQUEST")) {
+                while (failed[index] == 1) {
+                    index = (index + 1) % serversPowers.length;
+                }
+                requests[index]++;
+                if (requests[index] > max) {
+                    max = requests[index];
+                    maxIndex = index;
+                }
+                index = (index + 1) % serversPowers.length;
+            } else {
+                int i = Integer.parseInt(event.substring(5));
+                failed[i] = 1;
+            }
+        }
+        return maxIndex;
+    }
+
+    // test code for solution
+    public static void main(String[] args) {
+        servers test = new servers();
+        int[] serversPowers = { 1, 2, 1, 2, 1 };
+        String[] events = { "REQUEST", "REQUEST", "FAIL 2", "REQUEST", "FAIL 3", "REQUEST", "REQUEST" };
+        System.out.println(test.solution(serversPowers, events));
+    }
 }

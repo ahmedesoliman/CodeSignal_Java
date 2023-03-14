@@ -18,4 +18,11 @@ public class CenturyFromYear {
         return century;
     }
 
+    // test code for solution
+    public static void main(String[] args) {
+        CenturyFromYear test = new CenturyFromYear();
+        int year = 1700; // expected output: 17
+        System.out.println(test.solution(year));
+    }
+
 }

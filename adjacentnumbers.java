@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 // Given an array of integers numbers, find and return the index i of the first integer within the array that is less than its adjacent integers on both sides. Note that to satisfy these criteria, adjacent integers on both sides must exist.
 
 // Return -1 if none of the integers in the given array fit the criteria.
@@ -22,27 +24,36 @@
 // Explanation:
 // There are no integers with neighbors, so the criteria cannot be met.
 
-int solution(int[] numbers) {
-    
-    //return the index i of the first integer within the array.
+public class adjacentNumbers {
+
+    // return the index i of the first integer within the array.
     // int first = numbers[0];
     // int second = first + 2;
     // int element = numbers[first + 1];
 
-    for (int i = 0; i < numbers.length; i++){    
-        int first = numbers[i];
-        int second = first + 2;
-        int element = numbers[first + 1];
-        int lowest = 0;
-        
-        if (element < first && element < second) {
-            lowest = Arrays.asList(numbers).indexOf(element);
-            return lowest;
-        }
+    int solution(int[] numbers) {
 
-        
+        for (int i = 0; i < numbers.length; i++) {
+            int first = numbers[i];
+            int second = first + 2;
+            int element = numbers[first + 1];
+            int lowest = 0;
+
+            if (element < first && element < second) {
+                lowest = Arrays.asList(numbers).indexOf(element);
+                return lowest;
+            }
+
+        }
+        return -1;
+
     }
-    
-    return -1;
+
+    // test code for solution
+    public static void main(String[] args) {
+        adjacentNumbers test = new adjacentNumbers();
+        int[] numbers = { 3, 2, 1, 3, 2, 3 }; // expected output: 2
+        System.out.println(test.solution(numbers));
+    }
 
 }
